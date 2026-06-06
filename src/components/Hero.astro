@@ -162,7 +162,8 @@ import { site } from '../data/site';
   .badge {
     position: absolute;
     left: 0;
-    top: 46%;
+    /* Align the badge's top edge with the right-side hero blurb (also top: 50%). */
+    top: 50%;
     z-index: 5;
     display: inline-flex;
     align-items: center;
@@ -213,15 +214,16 @@ import { site } from '../data/site';
       /* Reset desktop's `align-self: flex-end` — in a column it means the right
          edge, which pushed the portrait off-centre. */
       align-self: center;
-      /* Smaller negative top margin → sits a little lower, less overlap with "Hey". */
-      margin: 2vw 0 0;
+      /* Top: sits a little lower under "Hey". Bottom: negative margin reclaims the
+         faded lower half of the image so "there" & the badge pull up into it. */
+      margin: 4vw 0 -22vw;
       width: min(72vw, 360px);
     }
     .hero-foot {
       grid-template-columns: 1fr;
       justify-items: center;
       gap: 14px;
-      margin-top: 28px;
+      margin-top: 18px;
     }
     .iam,
     .role {
@@ -229,7 +231,7 @@ import { site } from '../data/site';
     }
     .badge {
       position: static;
-      margin: 44px auto 0;
+      margin: 30px auto 0;
       display: flex;
       width: max-content;
     }
