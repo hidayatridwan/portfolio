@@ -1,0 +1,50 @@
+---
+
+---
+
+<section class="sec-pad" id="about">
+  <div class="wrap about">
+    <h2 class="kicker reveal">About</h2>
+    <div>
+      <p class="reveal">
+        A Bandung-based engineer with 13+ years building backend systems, ERPs, and integrations
+        across SaaS, pharma, logistics, and government.
+      </p>
+      <p class="meta reveal" data-d="80">
+        I care about systems that stay reliable under real load — clean APIs, sensible data models,
+        and platforms a business can actually run on. Diploma in Informatics Management, Bina Sarana
+        Informatika.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .about p {
+    font-family: var(--font-serif);
+    font-weight: 340;
+    font-size: clamp(22px, 2.5vw, 30px);
+    line-height: 1.34;
+    letter-spacing: -0.01em;
+  }
+  .about .meta {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-top: 26px;
+  }
+
+  @media (max-width: 900px) {
+    .about {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+</style>

@@ -1,0 +1,124 @@
+---
+import { site, mailto, tel } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="contact" id="contact">
+  <div class="wrap sec-pad">
+    <h2 class="cta reveal">Let's build something<br />reliable.</h2>
+    <div class="contact-row">
+      <div class="contact-meta reveal" data-d="80">
+        <a href={mailto}>{site.email}</a>
+        <a href={tel}>{site.phone}</a>
+        <span>{site.location}</span>
+      </div>
+      <a href={mailto} class="btn-pill invert reveal" data-d="140">Email me</a>
+    </div>
+    <div class="foot">
+      <span>© {year} {site.name}</span>
+      <div class="foot-links">
+        <a href={site.social.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+        <a href={site.social.github} target="_blank" rel="noopener">GitHub</a>
+        <span>{site.locationShort}</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .contact {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 36px 36px 0 0;
+    margin-top: 40px;
+  }
+  .contact .sec-pad {
+    padding: 120px 40px 64px;
+  }
+  .cta {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 360;
+    font-size: clamp(44px, 8vw, 108px);
+    line-height: 0.96;
+    letter-spacing: -0.02em;
+  }
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: end;
+    gap: 40px;
+    margin-top: 64px;
+  }
+  .contact-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .contact-meta a:hover {
+    color: #fff;
+  }
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    margin-top: 80px;
+    padding-top: 30px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .foot-links {
+    display: flex;
+    gap: 26px;
+  }
+  .foot-links a {
+    color: rgba(255, 255, 255, 0.7);
+    transition: 0.25s;
+  }
+  .foot-links a:hover {
+    color: #fff;
+  }
+
+  @media (max-width: 900px) {
+    .contact {
+      border-radius: 28px 28px 0 0;
+    }
+    .contact .sec-pad {
+      padding: 76px 22px 40px;
+    }
+    .contact-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 28px;
+      margin-top: 44px;
+    }
+    .foot {
+      margin-top: 52px;
+    }
+  }
+  @media (max-width: 560px) {
+    .contact .sec-pad {
+      padding: 60px 20px 36px;
+    }
+    .contact-meta {
+      font-size: 15px;
+      word-break: break-word;
+    }
+    .foot {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .foot-links {
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+  }
+</style>

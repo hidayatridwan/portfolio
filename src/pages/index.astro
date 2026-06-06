@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import MobileMenu from '../components/MobileMenu.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import Vision from '../components/Vision.astro';
+import Experience from '../components/Experience.astro';
+import Projects from '../components/Projects.astro';
+import Products from '../components/Products.astro';
+import About from '../components/About.astro';
+import Contact from '../components/Contact.astro';
+---
+
+<BaseLayout>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <Nav />
+  <MobileMenu />
+  <main id="main" tabindex="-1">
+    <Hero />
+    <Services />
+    <Vision />
+    <Experience />
+    <Projects />
+    <Products />
+    <About />
+  </main>
+  <Contact />
+</BaseLayout>
+
+<script>
+  import { initInteractions } from '../scripts/interactions';
+  initInteractions();
+</script>
+
+<style>
+  .skip-link {
+    position: absolute;
+    left: 12px;
+    top: -60px;
+    z-index: 100;
+    background: var(--ink);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+    font-weight: 500;
+    transition: top 0.25s var(--ease);
+  }
+  .skip-link:focus {
+    top: 12px;
+  }
+  main:focus-visible {
+    outline: none;
+  }
+</style>

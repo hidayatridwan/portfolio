@@ -1,0 +1,157 @@
+---
+import { products } from '../data/products';
+---
+
+<section class="sec-pad" id="products">
+  <div class="wrap">
+    <div class="prod-head">
+      <h2 class="kicker reveal">SaaS<br />products</h2>
+      <p class="prod-intro reveal" data-d="80">
+        Subscription platforms I build and run — multi-tenant by design, ready for teams to onboard
+        and scale.
+      </p>
+    </div>
+    <div class="prod-grid">
+      {
+        products.map((product, i) => (
+          <article class="prod-card reveal" data-d={i * 90}>
+            <div class="prod-top">
+              <span class="prod-tag">
+                <span class="dot" /> {product.category}
+              </span>
+              <span class="prod-idx">{String(i + 1).padStart(2, '0')}</span>
+            </div>
+            <h3>{product.name}</h3>
+            <p class="prod-lead">{product.tagline}</p>
+            <p>{product.description}</p>
+            <div class="chips">
+              {product.tags.map((tag) => (
+                <span class="chip">{tag}</span>
+              ))}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .prod-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .prod-intro {
+    max-width: 380px;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--muted);
+    font-weight: 500;
+    padding-bottom: 6px;
+  }
+  .prod-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px;
+    margin-top: 54px;
+  }
+  .prod-card {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    padding: 30px 32px 30px;
+    overflow: hidden;
+    background: linear-gradient(168deg, #fffaf3, #fff 60%);
+    transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), border-color 0.45s;
+  }
+  .prod-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(120% 80% at 0% 0%, rgba(242, 107, 33, 0.1), transparent 52%);
+    opacity: 0;
+    transition: opacity 0.45s;
+  }
+  .prod-card:hover {
+    transform: translateY(-8px) scale(1.012);
+    box-shadow: 0 44px 70px -44px rgba(60, 30, 0, 0.42);
+    border-color: transparent;
+  }
+  .prod-card:hover::before {
+    opacity: 1;
+  }
+  .prod-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+  .prod-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #7a5230;
+    background: rgba(242, 107, 33, 0.09);
+    border: 1px solid rgba(242, 107, 33, 0.18);
+    padding: 6px 12px 6px 11px;
+    border-radius: var(--radius-pill);
+  }
+  .prod-tag .dot {
+    width: 8px;
+    height: 8px;
+  }
+  .prod-idx {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--faint);
+  }
+  .prod-card h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 27px;
+    letter-spacing: -0.02em;
+    margin: 26px 0 6px;
+    position: relative;
+  }
+  .prod-lead {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .prod-card > p:not(.prod-lead) {
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--muted);
+    position: relative;
+  }
+  .prod-card .chips {
+    margin-top: 22px;
+    position: relative;
+  }
+  .prod-card .chip {
+    background: #fff;
+    font-size: 13px;
+    padding: 6px 13px;
+  }
+
+  @media (max-width: 900px) {
+    .prod-head {
+      gap: 14px;
+    }
+    .prod-grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+  }
+</style>

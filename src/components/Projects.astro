@@ -1,0 +1,138 @@
+---
+import { projects } from '../data/projects';
+---
+
+<section class="sec-pad" id="work">
+  <div class="wrap">
+    <h2 class="kicker center reveal">Recent projects</h2>
+    <div class="proj-grid">
+      {
+        projects.map((project, i) => (
+          <article class="card reveal" data-d={i * 90}>
+            <div class="card-head">
+              <span class="card-num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="arrow">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M7 17 17 7M9 7h8v8" />
+                </svg>
+              </span>
+            </div>
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
+            <div class="chips">
+              {project.tags.map((tag) => (
+                <span class="chip">{tag}</span>
+              ))}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .proj-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px;
+    margin-top: 56px;
+  }
+  .card {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    padding: 34px 34px 32px;
+    overflow: hidden;
+    background: #fff;
+    transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), border-color 0.45s;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(120% 80% at 100% 0%, rgba(242, 107, 33, 0.1), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.45s;
+  }
+  .card:hover {
+    transform: translateY(-8px) scale(1.012);
+    box-shadow: 0 44px 70px -44px rgba(60, 30, 0, 0.42);
+    border-color: transparent;
+  }
+  .card:hover::before {
+    opacity: 1;
+  }
+  .card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15px;
+    color: var(--faint);
+  }
+  .card h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 27px;
+    letter-spacing: -0.02em;
+    margin: 60px 0 12px;
+    position: relative;
+  }
+  .card p {
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--muted);
+    position: relative;
+    max-width: 90%;
+  }
+  .card .chips {
+    margin-top: 22px;
+    position: relative;
+  }
+  .card .chip {
+    background: #fff;
+    font-size: 13px;
+    padding: 6px 13px;
+  }
+  .arrow {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    display: grid;
+    place-items: center;
+    transition: 0.35s;
+  }
+  .card:hover .arrow {
+    background: var(--ink);
+    border-color: var(--ink);
+    transform: rotate(-45deg);
+  }
+  .arrow svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--ink);
+    transition: 0.35s;
+  }
+  .card:hover .arrow svg {
+    stroke: #fff;
+  }
+
+  @media (max-width: 900px) {
+    .proj-grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+  }
+</style>

@@ -1,0 +1,112 @@
+---
+import { experience } from '../data/experience';
+import { skills } from '../data/skills';
+---
+
+<section class="sec-pad" id="skills">
+  <div class="wrap">
+    <h2 class="kicker reveal">Experience<br />&amp; skills</h2>
+    <div class="exp-list">
+      {
+        experience.map((entry) => (
+          <div class="exp-row reveal">
+            <div class="exp-year">{entry.period}</div>
+            <div>
+              <div class="exp-role">{entry.role}</div>
+              <div class="exp-org">{entry.organization}</div>
+            </div>
+            <div class="exp-desc">{entry.description}</div>
+          </div>
+        ))
+      }
+    </div>
+    <div class="skill-block reveal">
+      {
+        skills.map((group) => (
+          <>
+            <div class="skill-cat">{group.category}</div>
+            <div class="chips">
+              {group.items.map((item) => (
+                <span class="chip">{item}</span>
+              ))}
+            </div>
+          </>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .exp-list {
+    margin-top: 54px;
+  }
+  .exp-row {
+    display: grid;
+    grid-template-columns: 130px 1.2fr 1.4fr;
+    gap: 30px;
+    align-items: start;
+    padding: 30px 0;
+    border-top: 1px solid var(--line);
+  }
+  .exp-row:last-of-type {
+    border-bottom: 1px solid var(--line);
+  }
+  .exp-year {
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 500;
+    padding-top: 3px;
+  }
+  .exp-role {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 21px;
+    letter-spacing: -0.01em;
+  }
+  .exp-org {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+  .exp-desc {
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .skill-block {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 18px 30px;
+    align-items: baseline;
+  }
+  .skill-cat {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--ink);
+  }
+
+  @media (max-width: 1024px) {
+    .exp-row {
+      grid-template-columns: 110px 1fr 1.2fr;
+      gap: 22px;
+    }
+  }
+  @media (max-width: 900px) {
+    .exp-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .skill-block {
+      grid-template-columns: 1fr;
+      gap: 6px 0;
+    }
+    .skill-cat {
+      margin-top: 16px;
+    }
+  }
+</style>

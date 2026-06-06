@@ -1,0 +1,163 @@
+---
+import { site } from '../data/site';
+---
+
+<section class="sec-pad">
+  <div class="wrap">
+    <h2 class="kicker reveal">Turning<br />my vision</h2>
+    <div class="vision-grid">
+      <div>
+        <p class="vision-lead reveal">I build reliable solutions for real businesses to run on.</p>
+        <div class="stats">
+          {
+            site.stats.map((stat, i) => (
+              <div class="stat reveal" data-d={i * 120}>
+                <div class="stat-num">
+                  <span class="count" data-to={stat.value}>0</span>
+                  {stat.suffix && <span class="plus">{stat.suffix}</span>}
+                </div>
+                <div class="stat-label">{stat.label}</div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class="station reveal" data-d="120" aria-hidden="true">
+        <div class="monitor">
+          <div class="screen">
+            <span class="clock">10:44</span>
+            <span class="code-line" style="top:24px;width:34%;"></span>
+            <span class="code-line" style="top:38px;width:52%;opacity:.7;"></span>
+            <span class="code-line" style="top:52px;width:26%;opacity:.55;"></span>
+            <span class="code-line" style="top:66px;width:44%;opacity:.7;"></span>
+            <span class="code-line" style="top:80px;width:30%;opacity:.5;"></span>
+          </div>
+        </div>
+        <div class="stand"></div>
+        <div class="base"></div>
+        <div class="desk"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .vision-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 64px;
+    align-items: center;
+    margin-top: 48px;
+  }
+  .vision-lead {
+    font-family: var(--font-serif);
+    font-size: clamp(26px, 3vw, 38px);
+    line-height: 1.18;
+    font-weight: 380;
+    letter-spacing: -0.01em;
+    max-width: 420px;
+    margin-bottom: 54px;
+  }
+  .stats {
+    display: flex;
+    gap: 70px;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(54px, 6vw, 82px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .stat-num .plus {
+    color: var(--accent);
+  }
+  .stat-label {
+    font-size: 15px;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  /* Decorative workstation illustration */
+  .station {
+    position: relative;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: linear-gradient(160deg, #fbe7cd, #f6d2a8 60%, #efbf86);
+    padding: 56px 48px 0;
+    aspect-ratio: 5 / 4;
+    box-shadow: 0 50px 90px -50px rgba(120, 60, 0, 0.55);
+  }
+  .monitor {
+    background: #15110d;
+    border-radius: 14px;
+    padding: 9px;
+    height: 62%;
+    box-shadow: 0 30px 50px -30px rgba(0, 0, 0, 0.6);
+  }
+  .screen {
+    height: 100%;
+    border-radius: 7px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(150deg, #ff8a3d, #f2541e 55%, #c43c12);
+  }
+  .screen .clock {
+    position: absolute;
+    right: 14px;
+    top: 11px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+  }
+  .code-line {
+    position: absolute;
+    left: 16px;
+    height: 7px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.85);
+  }
+  .station .stand {
+    width: 14%;
+    height: 9%;
+    background: #241b13;
+    margin: 0 auto;
+  }
+  .station .base {
+    width: 40%;
+    height: 12px;
+    background: #1c140d;
+    border-radius: 6px;
+    margin: 0 auto;
+  }
+  .station .desk {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 14%;
+    background: linear-gradient(#e7b079, #caa16f);
+  }
+
+  @media (max-width: 1024px) {
+    .vision-grid {
+      gap: 44px;
+    }
+  }
+  @media (max-width: 900px) {
+    .vision-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .stats {
+      gap: 48px;
+    }
+  }
+  @media (max-width: 560px) {
+    .stats {
+      flex-direction: column;
+      gap: 30px;
+    }
+  }
+</style>
