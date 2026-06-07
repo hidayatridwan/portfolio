@@ -29,9 +29,16 @@ jobs:
           chmod 600 ~/.ssh/ubuntu
           ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
 
+      - name: Create deploy directory
+        run: |
+          ssh -i ~/.ssh/ubuntu \
+            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
+            "mkdir -p ${{ secrets.VPS_DEPLOY_PATH }}"
+
       - name: Deploy via rsync
         run: |
           rsync -avz --delete \
             -e "ssh -i ~/.ssh/ubuntu" \
+            --rsync-path="mkdir -p ${{ secrets.VPS_DEPLOY_PATH }} && rsync" \
             ./dist/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_DEPLOY_PATH }}/
