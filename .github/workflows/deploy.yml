@@ -25,33 +25,33 @@ jobs:
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          printf '%s\n' "${{ secrets.VPS_SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "${{ secrets.VPS_SSH_PRIVATE_KEY }}" > ~/.ssh/ubuntu
+          chmod 600 ~/.ssh/ubuntu
           ssh-keyscan -p ${{ secrets.VPS_PORT }} -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
           # Diagnostics: validate the key parses and show its fingerprint
           echo "=== Private key sanity check ==="
-          head -1 ~/.ssh/deploy_key
-          tail -1 ~/.ssh/deploy_key
-          ssh-keygen -y -f ~/.ssh/deploy_key > /tmp/derived.pub && echo "Key parsed OK" || echo "KEY IS INVALID/CORRUPT"
+          head -1 ~/.ssh/ubuntu
+          tail -1 ~/.ssh/ubuntu
+          ssh-keygen -y -f ~/.ssh/ubuntu > /tmp/derived.pub && echo "Key parsed OK" || echo "KEY IS INVALID/CORRUPT"
           echo "=== Public key derived from the secret (must be in VPS authorized_keys) ==="
           cat /tmp/derived.pub
 
       - name: SSH connectivity test (verbose)
         run: |
-          ssh -v -p ${{ secrets.VPS_PORT }} -o IdentitiesOnly=yes -i ~/.ssh/deploy_key \
+          ssh -v -p ${{ secrets.VPS_PORT }} -o IdentitiesOnly=yes -i ~/.ssh/ubuntu \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
             "echo CONNECTED as \$(whoami) on \$(hostname)" || true
 
       - name: Create deploy directory
         run: |
-          ssh -p ${{ secrets.VPS_PORT }} -o IdentitiesOnly=yes -i ~/.ssh/deploy_key \
+          ssh -p ${{ secrets.VPS_PORT }} -o IdentitiesOnly=yes -i ~/.ssh/ubuntu \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
             "mkdir -p ${{ secrets.VPS_DEPLOY_PATH }}"
 
       - name: Deploy via rsync
         run: |
           rsync -avz --delete \
-            -e "ssh -p ${{ secrets.VPS_PORT }} -o IdentitiesOnly=yes -i ~/.ssh/deploy_key" \
+            -e "ssh -p ${{ secrets.VPS_PORT }} -o IdentitiesOnly=yes -i ~/.ssh/ubuntu" \
             --rsync-path="mkdir -p ${{ secrets.VPS_DEPLOY_PATH }} && rsync" \
             ./dist/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_DEPLOY_PATH }}/
