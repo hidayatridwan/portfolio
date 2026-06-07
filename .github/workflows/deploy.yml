@@ -25,13 +25,13 @@ jobs:
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.VPS_SSH_PRIVATE_KEY }}" > ~/.ssh/ridwannhidayat
-          chmod 600 ~/.ssh/ridwannhidayat
+          echo "${{ secrets.VPS_SSH_PRIVATE_KEY }}" > ~/.ssh/ubuntu
+          chmod 600 ~/.ssh/ubuntu
           ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy via rsync
         run: |
           rsync -avz --delete \
-            -e "ssh -i ~/.ssh/ridwannhidayat" \
+            -e "ssh -i ~/.ssh/ubuntu" \
             ./dist/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_DEPLOY_PATH }}/
