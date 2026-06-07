@@ -27,7 +27,7 @@ jobs:
           mkdir -p ~/.ssh
           printf '%s\n' "${{ secrets.VPS_SSH_PRIVATE_KEY }}" > ~/.ssh/ubuntu
           chmod 600 ~/.ssh/ubuntu
-          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -p ${{ secrets.VPS_PORT }} -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
           # Diagnostics: validate the key parses and show its fingerprint
           echo "=== Private key sanity check ==="
           head -1 ~/.ssh/ubuntu
@@ -38,20 +38,20 @@ jobs:
 
       - name: SSH connectivity test (verbose)
         run: |
-          ssh -v -o IdentitiesOnly=yes -i ~/.ssh/ubuntu \
+          ssh -v -p ${{ secrets.VPS_PORT }} -o IdentitiesOnly=yes -i ~/.ssh/ubuntu \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
             "echo CONNECTED as \$(whoami) on \$(hostname)" || true
 
       - name: Create deploy directory
         run: |
-          ssh -o IdentitiesOnly=yes -i ~/.ssh/ubuntu \
+          ssh -p ${{ secrets.VPS_PORT }} -o IdentitiesOnly=yes -i ~/.ssh/ubuntu \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
             "mkdir -p ${{ secrets.VPS_DEPLOY_PATH }}"
 
       - name: Deploy via rsync
         run: |
           rsync -avz --delete \
-            -e "ssh -o IdentitiesOnly=yes -i ~/.ssh/ubuntu" \
+            -e "ssh -p ${{ secrets.VPS_PORT }} -o IdentitiesOnly=yes -i ~/.ssh/ubuntu" \
             --rsync-path="mkdir -p ${{ secrets.VPS_DEPLOY_PATH }} && rsync" \
             ./dist/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_DEPLOY_PATH }}/
