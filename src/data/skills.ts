@@ -4,7 +4,7 @@ export interface SkillGroup {
 }
 
 export const skills: SkillGroup[] = [
-  { category: 'Languages', items: ['PHP', 'JavaScript', 'Dart'] },
+  { category: 'Languages', items: ['PHP', 'JavaScript', 'Dart', 'Rust'] },
   {
     category: 'Frameworks',
     items: ['Node.js', 'Laravel', 'Slim', 'CodeIgniter', 'Express', 'Svelte', 'React', 'Flutter', 'jQuery'],
